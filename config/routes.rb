@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   	scope 'user' do
   		post 'signin' => 'user#signin'
   	end
+  	put 'user' => 'user#update'
   end
 end
