@@ -1,4 +1,6 @@
 class UserController < ApplicationController
+	before_action :restrict_user, except: [:signins]
+	
 	def signin
 		@user = User.create_with(user_params).find_or_create_by(email: params[:user][:email])
 		@user.regenerate_access_token
