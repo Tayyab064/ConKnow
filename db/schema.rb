@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190116133958) do
+ActiveRecord::Schema.define(version: 20190121160130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.string   "ans",         default: ""
+    t.integer  "ans_by_id"
+    t.integer  "question_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "ans_by_type"
+    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
+  end
+
+  create_table "device_tokens", force: :cascade do |t|
+    t.string   "device",     default: "Android"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["user_id"], name: "index_device_tokens_on_user_id", using: :btree
+  end
+
+  create_table "knowledges", force: :cascade do |t|
+    t.string   "topic",      default: ""
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["user_id"], name: "index_knowledges_on_user_id", using: :btree
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "ques",       default: ""
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            default: ""
